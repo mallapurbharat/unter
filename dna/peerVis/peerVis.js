@@ -32,6 +32,10 @@ function getPeers() {
         me: p.Hash === App.Key.Hash,
         address: p.Hash
       })
+      console.log('Pushed', JSON.stringify({
+        me: p.Hash === App.Key.Hash,
+        address: p.Hash
+      }))
     } catch(e) {}
   })
   return peers
