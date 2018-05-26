@@ -19,4 +19,4 @@ Pull requests welcome. If you're at the Austin hackathon, see me (Chris D) for r
 
 
 ### Questions
-* Should agent.txt and priv.key remain in .gitignore? Does someone cloning this repo need to add/generate their own? How?
+* Should agent.txt and priv.key remain in .gitignore? Does someone cloning this repo need to add/generate their own? How? **Yes, put in .gitignore; unclear on the rest.**
