@@ -1,6 +1,6 @@
 # Unter
 
-Let's use [Holochain](https://holochain.org/) to build an Uber clone minus the middleman. 
+Let's use [Holochain](https://holochain.org/) to build an Uber clone minus the middleman.
 
 
 ### Resources
@@ -12,6 +12,10 @@ Let's use [Holochain](https://holochain.org/) to build an Uber clone minus the m
 ### Contributing
 
 Pull requests welcome. If you're at the Austin hackathon, see me (Chris D) for repo write access.
+
+
+### Todo
+* Add tests to peerVis zome
 
 
 ### Questions
