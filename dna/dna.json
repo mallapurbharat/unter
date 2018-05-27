@@ -1,123 +1,128 @@
 {
-   "Version": 1,
-   "UUID": "6a9cdc9b-ad57-4277-abe0-1928072eccdf",
-   "Name": "unter",
-   "Properties": {
-      "description": "Underground ridesharing network",
-      "language": "en"
-   },
-   "PropertiesSchemaFile": "properties_schema.json",
-   "RequiresVersion": 0,
-   "DHTConfig": {
-      "HashType": "sha2-256",
-      "RedundancyFactor": 0
-   },
-   "Progenitor": {
-      "Identity": "",
-      "PubKey": null
-   },
-   "Zomes": [
-      {
-         "Name": "peerVis",
-         "Desription": "show whos online",
-         "CodeFile": "peerVis.js",
-         "RibosomeType": "js",
-         "Config": {
-            "ErrorHandling": "throwErrors"
-         },
-         "Entries": [
-            {
-               "Name": "peerLink",
-               "DataFormat": "links"
-            }
-         ],
-         "Functions": [
-            {
-               "Name": "getPeers",
-               "CallingType": "json",
-               "Exposure": "public"
-            }
-         ]
-      },
-      {
-         "Name": "rides",
-         "Desription": "Manage rides",
-         "CodeFile": "rides.js",
-         "RibosomeType": "js",
-         "Config": {
-            "ErrorHandling": "throwErrors"
-         },
-         "Entries": [
-            {
-               "Name": "ride",
-               "DataFormat": "json",
-               "Schema": "",
-               "SchemaFile": "ride.json",
-               "Sharing": "public"
+    "Version": 1,
+    "UUID": "6a9cdc9b-ad57-4277-abe0-1928072eccdf",
+    "Name": "unter",
+    "Properties": {
+        "description": "Underground ridesharing network",
+        "language": "en"
+    },
+    "PropertiesSchemaFile": "properties_schema.json",
+    "RequiresVersion": 0,
+    "DHTConfig": {
+        "HashType": "sha2-256",
+        "RedundancyFactor": 0
+    },
+    "Progenitor": {
+        "Identity": "",
+        "PubKey": null
+    },
+    "Zomes": [
+        {
+            "Name": "peerVis",
+            "Desription": "show whos online",
+            "CodeFile": "peerVis.js",
+            "RibosomeType": "js",
+            "Config": {
+                "ErrorHandling": "throwErrors"
             },
-            {
-               "Name": "agent_ride_link",
-               "DataFormat": "links"
+            "Entries": [
+                {
+                    "Name": "peerLink",
+                    "DataFormat": "links"
+                }
+            ],
+            "Functions": [
+                {
+                    "Name": "getPeers",
+                    "CallingType": "json",
+                    "Exposure": "public"
+                }
+            ]
+        },
+        {
+            "Name": "rides",
+            "Desription": "Manage rides",
+            "CodeFile": "rides.js",
+            "RibosomeType": "js",
+            "Config": {
+                "ErrorHandling": "throwErrors"
             },
-            {
-               "Name": "rides",
-               "DataFormat": "links"
-            }
-         ],
-         "Functions": [
-            {
-               "Name": "requestRide",
-               "CallingType": "json",
-               "Exposure": "public"
-            }
-         ]
-      },
-      {
-         "Name": "users",
-         "Desription": "Manage users",
-         "CodeFile": "users.js",
-         "RibosomeType": "js",
-         "Config": {
-            "ErrorHandling": "throwErrors"
-         },
-         "Entries": [
-            {
-               "Name": "user",
-               "DataFormat": "json",
-               "Schema": "",
-               "SchemaFile": "user.json",
-               "Sharing": "public"
+            "Entries": [
+                {
+                    "Name": "ride",
+                    "DataFormat": "json",
+                    "Schema": "",
+                    "SchemaFile": "ride.json",
+                    "Sharing": "public"
+                },
+                {
+                    "Name": "agent_ride_link",
+                    "DataFormat": "links"
+                },
+                {
+                    "Name": "rides",
+                    "DataFormat": "links"
+                }
+            ],
+            "Functions": [
+                {
+                    "Name": "requestRide",
+                    "CallingType": "json",
+                    "Exposure": "public"
+                }
+            ]
+        },
+        {
+            "Name": "users",
+            "Desription": "Manage users",
+            "CodeFile": "users.js",
+            "RibosomeType": "js",
+            "Config": {
+                "ErrorHandling": "throwErrors"
             },
-            {
-               "Name": "agent_user_link",
-               "DataFormat": "links"
-            },
-            {
-               "Name": "registrations",
-               "DataFormat": "links"
-            },
-            {
-               "Name": "peerLink",
-               "DataFormat": "links"
-            }
-         ],
-         "Functions": [
-            {
-               "Name": "register",
-               "CallingType": "json",
-               "Exposure": "public"
-            }
-         ]
-      },
-      {
-         "Name": "anchors",
-         "Description": "This is used to make things findable on the DHT",
-         "CodeFile": "anchors.js",
-         "RibosomeType": "js",
-         "BridgeFuncs": null,
-         "Config": null,
-         "Entries": null,
-         "Functions": []
-      }
-   ]
+            "Entries": [
+                {
+                    "Name": "user",
+                    "DataFormat": "json",
+                    "Schema": "",
+                    "SchemaFile": "user.json",
+                    "Sharing": "public"
+                },
+                {
+                    "Name": "agent_user_link",
+                    "DataFormat": "links"
+                },
+                {
+                    "Name": "registrations",
+                    "DataFormat": "links"
+                },
+                {
+                    "Name": "peerLink",
+                    "DataFormat": "links"
+                }
+            ],
+            "Functions": [
+                {
+                    "Name": "register",
+                    "CallingType": "json",
+                    "Exposure": "public"
+                },
+                {
+                    "Name": "getUser",
+                    "CallingType": "json",
+                    "Exposure": "public"
+                }
+            ]
+        },
+        {
+            "Name": "anchors",
+            "Description": "This is used to make things findable on the DHT",
+            "CodeFile": "anchors.js",
+            "RibosomeType": "js",
+            "BridgeFuncs": null,
+            "Config": null,
+            "Entries": null,
+            "Functions": []
+        }
+    ]
 }

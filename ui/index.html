@@ -25,11 +25,67 @@
   <main role="main" class="container">
     <h2>unter</h2>
     <div id="map"></div>
-    <a href="./peervis.html">
+    <a href="./peerVis.html">
       <button class="btn btn-primary btn-lg">See Peers</button>
     </a>
   </main>
   <script>
+
+  /*--------------------------
+          check for peers
+    --------------------------*/
+
+  var currentPeers = ""
+
+  function getPeers (callback) {
+    var xhr = new XMLHttpRequest()
+    var url = '/fn/peerVis/getPeers'
+    xhr.open('POST', url, true)
+    xhr.setRequestHeader('Content-type', 'application/json')
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        callback(JSON.parse(xhr.responseText))
+      }
+    }
+    xhr.send("")
+  }
+
+  function addResultsToPage(peers) {
+    var peersTest = peers.sort().join('')
+    var isSame = peersTest === currentPeers
+    if (isSame) {
+      // dont update, if peer list is the same
+      return
+    }
+    // update the currentPeers cache
+    currentPeers = peersTest
+
+    peers.forEach(function(p) {
+      console.log("Peer found:", p)
+      console.log("Checking DHT for user info of " + p.address)
+
+      var xhr = new XMLHttpRequest()
+      var url = '/fn/users/getUser'
+      xhr.open('POST', url, true)
+      xhr.setRequestHeader('Content-type', 'application/json')
+      var data = JSON.stringify(p.address);
+      xhr.send(data);
+
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          console.log()
+          console.log("Returned from getUser with:", JSON.parse(xhr.responseText))
+        }
+      }
+    })
+  }
+
+  window.setInterval(function() {
+    getPeers(addResultsToPage)
+  }, 1000)
+
+
+
     /*--------------------------
               init map
       --------------------------*/

@@ -67,3 +67,9 @@ function register(x) {
   }]})
   return key
 }
+
+// Get profile information for a user
+// receives a user hashkey
+function getUser(x) {
+    return get(x);
+}
