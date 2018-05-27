@@ -24,13 +24,19 @@
   <!-- Begin page content -->
   <main role="main" class="container">
     <h2>unter</h2>
-    <div id="map"></div>
     <hr />
     <button class="btn btn-primary btn-lg" onClick="testUserCreate()">Create User</button>
     <br /><br />
     <a href="./peerVis.html">
       <button class="btn btn-primary btn-lg">See Peers</button>
     </a>
+    <br /><br />
+    <button id="fetchButton" class="btn btn-primary btn-lg" onClick="testUserFetch()">Test Fetch User</button>
+    <hr />
+    <div id="text"></div>
+    <hr />
+    <div id="map"></div>
+
   </main>
   <script>
 
@@ -40,9 +46,10 @@
     xhr.open('POST', url, true)
     xhr.setRequestHeader('Content-type', 'application/json')
     xhr.onreadystatechange = function () {
-      console.log(xhr)
       if (xhr.readyState === 4 && xhr.status === 200) {
-        // console.log("Returned from getPeers with", JSON.parse(xhr.responseText))
+        $("#text").html(xhr.responseText)
+        $("#fetchButton").attr("name", xhr.responseText)
+        console.log("Returned from register with", JSON.parse(xhr.responseText))
         // callback(JSON.parse(xhr.response))
       }
     }
@@ -55,6 +62,24 @@
     xhr.send(data)
   }
 
+  function testUserFetch() {
+    console.log('in testUserFetch')
+    var userHashJson = $("#fetchButton").attr("name")
+
+    var xhr = new XMLHttpRequest()
+    var url = '/fn/users/getUser'
+    xhr.open('POST', url, true)
+    xhr.setRequestHeader('Content-type', 'application/json')
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        console.log("Returned from testUserFetch with", JSON.parse(xhr.responseText))
+      }
+    }
+
+    xhr.send(userHashJson)
+
+
+  }
 
   /*--------------------------
           check for peers
