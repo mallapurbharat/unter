@@ -25,11 +25,36 @@
   <main role="main" class="container">
     <h2>unter</h2>
     <div id="map"></div>
+    <hr />
+    <button class="btn btn-primary btn-lg" onClick="testUserCreate()">Create User</button>
+    <br /><br />
     <a href="./peerVis.html">
       <button class="btn btn-primary btn-lg">See Peers</button>
     </a>
   </main>
   <script>
+
+  function testUserCreate() {
+    var xhr = new XMLHttpRequest()
+    var url = '/fn/users/register'
+    xhr.open('POST', url, true)
+    xhr.setRequestHeader('Content-type', 'application/json')
+    xhr.onreadystatechange = function () {
+      console.log(xhr)
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        // console.log("Returned from getPeers with", JSON.parse(xhr.responseText))
+        // callback(JSON.parse(xhr.response))
+      }
+    }
+    var data = JSON.stringify({
+      username: "anon",
+      firstName: "Unknown",
+      lastName: "User",
+      email: "unknown@user.com"
+    })
+    xhr.send(data)
+  }
+
 
   /*--------------------------
           check for peers

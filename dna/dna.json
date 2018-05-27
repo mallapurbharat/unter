@@ -90,7 +90,8 @@
                 },
                 {
                     "Name": "agent_user_link",
-                    "DataFormat": "links"
+                    "DataFormat": "links",
+                    "Sharing": "public"
                 },
                 {
                     "Name": "registrations",

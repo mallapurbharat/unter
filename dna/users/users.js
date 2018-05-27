@@ -56,9 +56,13 @@ function validateCommit(entry_type,entry,header,pkg,sources) {
 
 // Register new user
 function register(x) {
+  console.log("In register with")
+  console.log(x)
   x.agent_id = App.Key.Hash
   x.agent_hash=App.Agent.Hash
   var key = commit("user", x);
+  console.log("COMMITTED")
+  console.log(JSON.stringify(x))
   commit("registrations", {Links:[{Base:App.DNA.Hash,Link:key,Tag:"registered_users"}]})
   commit("agent_user_link", { Links:[{
     Base: App.Key.Hash,
@@ -71,5 +75,21 @@ function register(x) {
 // Get profile information for a user
 // receives a user hashkey
 function getUser(x) {
-    return get(x);
+
+  var user = get(x)
+  if (user === HC.HashNotFound) {
+    // handle hashNotFound case
+    console.log('Hash not found')
+  } else {
+    // do something with the entry
+    debug('Hash found with user')
+    debug(user)
+    debug(user.username)
+    var links = getLinks(App.DNA.Hash, "2", { Load: true })
+    console.log("LINKS")
+    console.log(links)
+    debug(links)
+  }
+
+  return user;
 }
