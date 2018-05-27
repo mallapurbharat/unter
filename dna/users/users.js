@@ -54,6 +54,7 @@ function validateCommit(entry_type,entry,header,pkg,sources) {
     return isSourcesOwnProfile(entry, sources);
 }
 
+// Register new user
 function register(x) {
   x.agent_id = App.Key.Hash
   x.agent_hash=App.Agent.Hash

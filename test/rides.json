@@ -1,0 +1,17 @@
+{
+    "Tests": [
+        {
+            "Zome":"rides",
+            "FnName":"requestRide",
+            "Input": {
+                "fromLat": "30.2679492",
+                "fromLng":"-97.74515029",
+                "toLat":"30.2409258",
+                "toLng":"-97.7852419",
+                "description": "Need a ride for 7 to go line dancing, will pay in holo fuel"
+            },
+            "Output":"%h2%",
+            "Err":""
+        }
+    ]
+}

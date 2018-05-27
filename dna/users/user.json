@@ -1,13 +1,13 @@
 {
-	"title": "User Schema",
+	"title": "User schema",
 	"type": "object",
 	"properties": {
 		"agent_id": {
 			"type": "string"
 		},
 		"agent_hash": {
-				"type": "string"
-			},
+			"type": "string"
+		},
 		"username": {
 			"type": "string"
 		},

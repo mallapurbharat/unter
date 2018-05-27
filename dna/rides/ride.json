@@ -1,0 +1,34 @@
+{
+   "title": "Ride schema",
+   "type": "object",
+   "properties": {
+      "agent_id": {
+   			"type": "string"
+   		},
+   		"agent_hash": {
+   			"type": "string"
+   		},
+      "fromLat": {
+         "type": "string"
+      },
+      "fromLng": {
+         "type": "string"
+      },
+      "toLat": {
+         "type": "string"
+      },
+      "toLon": {
+         "type": "string"
+      },
+      "description": {
+         "type": "string"
+      }
+   },
+   "required": [
+      "fromLat",
+      "fromLng",
+      "toLat",
+      "toLng",
+      "description"
+   ]
+}
