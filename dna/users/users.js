@@ -35,6 +35,10 @@ function isLinkFromSource(entry, sources) {
   return true
 }
 
+function validateLink() {
+  return true
+}
+
 function validatePut(entry_type,entry,header,pkg,sources) {
     return validateCommit(entry_type,entry,header,pkg,sources)
 }
@@ -57,10 +61,9 @@ function validateCommit(entry_type,entry,header,pkg,sources) {
 // Register new user
 function register(x) {
   console.log("In register with")
-  console.log(x)
   x.agent_id = App.Key.Hash
-  x.agent_hash=App.Agent.Hash
-  var key = commit("user", x);
+  x.agent_hash = App.Agent.Hash
+  var key = commit("user", x)
   console.log("COMMITTED")
   console.log(JSON.stringify(x))
   commit("registrations", {Links:[{Base:App.DNA.Hash,Link:key,Tag:"registered_users"}]})
@@ -75,21 +78,41 @@ function register(x) {
 // Get profile information for a user
 // receives a user hashkey
 function getUser(x) {
-
+  console.log("Calling getUser with user hashkey " + x)
   var user = get(x)
   if (user === HC.HashNotFound) {
     // handle hashNotFound case
     console.log('Hash not found')
+    return false
   } else {
     // do something with the entry
+    console.log('-------')
+
     debug('Hash found with user')
     debug(user)
-    debug(user.username)
-    var links = getLinks(App.DNA.Hash, "2", { Load: true })
-    console.log("LINKS")
-    console.log(links)
-    debug(links)
-  }
 
-  return user;
+    console.log('-------')
+
+    // var dnalinks = getLinks(App.DNA.Hash, "", { Load: true })
+    // debug("DNA LINKS:")
+    // debug(dnalinks)
+
+    // console.log('-------')
+
+    // var keylinks = getLinks(App.Key.Hash, "user", { Load: true })
+    // debug("KEY LINKS:")
+    // debug(keylinks)
+    //
+    // console.log('-------')
+
+    var agentlinks = getLinks(App.Key.Hash, "user", { Load: true })
+    debug("AGENT LINKS:")
+    debug(agentlinks)
+    console.log('----------------------')
+    if (agentlinks[0]) {
+      return JSON.stringify(agentlinks[0].Entry)
+    } else {
+      return false
+    }
+  }
 }
