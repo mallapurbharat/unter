@@ -105,7 +105,9 @@ function getUser(x) {
     //
     // console.log('-------')
 
-    var agentlinks = getLinks(App.Key.Hash, "user", { Load: true })
+    // APP KEY HASH SCREWED UP
+
+    var agentlinks = getLinks(x, "user", { Load: true })   // App.Key.Hash
     debug("AGENT LINKS:")
     debug(agentlinks)
     console.log('----------------------')
