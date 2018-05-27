@@ -22,6 +22,7 @@ function validateLink() {
 function getPeers() {
   var peers = []
   var possiblePeers = getLinks(App.DNA.Hash, "peer")
+  console.log("Hashes of peers:")
   console.log(JSON.stringify(possiblePeers))
   // try contacting each peer
   possiblePeers.forEach(function (p) {

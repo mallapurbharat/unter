@@ -34,10 +34,26 @@
   <main role="main" class="container-fluid">
     <h2>unter</h2>
     <hr />
-    <button class="btn btn-primary btn-lg unterbutton" onClick="testUserCreate()">Create User</button>
-    <button id="fetchButton" class="btn btn-primary btn-lg unterbutton" onClick="testUserFetch()">Test Fetch User</button>
-    <hr />
-    <div id="text"></div>
+    <div class="row">
+      <div class="col-md-4">
+
+        <form class="form">
+          <div class="form-group">
+            <label for="usernameInput">Username</label>
+            <input type="text" value="tester123" class="form-control" id="usernameInput" placeholder="Jane Doe">
+          </div>
+          <div class="form-group">
+            <label for="emailInput">Email</label>
+            <input type="email" value="tester@test.com" class="form-control" id="emailInput" placeholder="jane.doe@example.com">
+          </div>
+          <button id="createUserButton" class="btn btn-default">Create User</button>
+        </form>
+
+      </div>
+      <div class="col-md-8">
+        <div id="text"></div>
+      </div>
+    </div>
     <hr />
     <div class="row">
       <div class="col-md-6">
@@ -51,29 +67,35 @@
   </main>
   <script>
 
-  function testUserCreate() {
-    var xhr = new XMLHttpRequest()
-    var url = '/fn/users/register'
-    xhr.open('POST', url, true)
-    xhr.setRequestHeader('Content-type', 'application/json')
-    xhr.onreadystatechange = function () {
-      if (xhr.readyState === 4 && xhr.status === 200) {
-        $("#text").html(xhr.responseText)
-        $("#fetchButton").attr("name", xhr.responseText)
-        console.log("Returned from register with", JSON.parse(xhr.responseText))
-        // callback(JSON.parse(xhr.response))
+  $("#createUserButton").on('click',function(e){
+      e.preventDefault();
+      //ajax code here
+      var username = $("#usernameInput").val()
+      var email = $("#emailInput").val()
+      console.log(email)
+
+      var xhr = new XMLHttpRequest()
+      var url = '/fn/users/register'
+      xhr.open('POST', url, true)
+      xhr.setRequestHeader('Content-type', 'application/json')
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          $("#text").html(xhr.responseText)
+          $("#fetchButton").attr("name", xhr.responseText)
+          console.log("Returned from register with", JSON.parse(xhr.responseText))
+          // callback(JSON.parse(xhr.response))
+        }
       }
-    }
-    var data = JSON.stringify({
-      username: "anon",
-      firstName: "Unknown",
-      lastName: "User",
-      lat: "30.2679492",
-      lng: "-97.74515029",
-      email: "unknown@user.com"
-    })
-    xhr.send(data)
-  }
+      var data = JSON.stringify({
+        username: username,
+        email: email,
+        firstName: "Unknown",
+        lastName: "User",
+        lat: "30.2679492",
+        lng: "-97.74515029"
+      })
+      xhr.send(data)
+  });
 
   function testUserFetch() {
     var userHashJson = $("#fetchButton").attr("name")
@@ -103,7 +125,7 @@
     xhr.setRequestHeader('Content-type', 'application/json')
     xhr.onreadystatechange = function () {
       if (xhr.readyState === 4 && xhr.status === 200) {
-        console.log("Returned from getPeers with", JSON.stringify(JSON.parse(xhr.responseText)))
+        // console.log("Returned from getPeers with", JSON.stringify(JSON.parse(xhr.responseText)))
         callback(JSON.parse(xhr.responseText))
       }
     }
@@ -126,7 +148,7 @@
 
     peers.forEach(function(p) {
       console.log("Peer found:", p)
-      console.log("Checking DHT for user info of " + p.address)
+      // console.log("Checking DHT for user info of " + p.address)
 
       elements.push({
         group: 'nodes',
@@ -137,8 +159,6 @@
           label: p.me ? "(me) " + p.address : p.address
         }
       })
-
-      console.log("ELEMENTS", JSON.stringify(elements))
 
       var xhr = new XMLHttpRequest()
       var url = '/fn/users/getUser'
