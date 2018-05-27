@@ -170,7 +170,10 @@
       xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
           // console.log(xhr)
-          console.log("Returned from getUser with:", JSON.parse(xhr.responseText))
+          var getUser = JSON.parse(xhr.responseText)
+          console.log("Returned from getUser with:", getUser)
+          // console.log(getUser.lng)
+          // console.log(getUser.lat)
         }
       }
     })
@@ -230,18 +233,18 @@
       }
 
       /* event listener to add marker */
-      google.maps.event.addListener(map, 'click', function(e) {
-
-          console.log(e.latLng.lat())
-          console.log(e.latLng.lng())
-
-          new google.maps.Marker({
-            position: {lat: e.latLng.lat(), lng: e.latLng.lng()},
-            // animation: google.maps.Animation.DROP,
-            map: this,
-            icon: carIcon
-          })
-      });
+      // google.maps.event.addListener(map, 'click', function(e) {
+      //
+      //     console.log(e.latLng.lat())
+      //     console.log(e.latLng.lng())
+      //
+      //     new google.maps.Marker({
+      //       position: {lat: e.latLng.lat(), lng: e.latLng.lng()},
+      //       // animation: google.maps.Animation.DROP,
+      //       map: this,
+      //       icon: carIcon
+      //     })
+      // });
 
       /* drop the cars on the map */
       function dropCars(){
