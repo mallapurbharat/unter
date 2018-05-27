@@ -78,7 +78,7 @@ function register(x) {
 // Get profile information for a user
 // receives a user hashkey
 function getUser(x) {
-  console.log("Calling getUser with user hashkey " + x)
+  // console.log("Calling getUser with user hashkey " + x)
   var user = get(x)
   if (user === HC.HashNotFound) {
     // handle hashNotFound case
@@ -86,12 +86,12 @@ function getUser(x) {
     return false
   } else {
     // do something with the entry
-    console.log('-------')
+    // console.log('-------')
+    //
+    // debug('Hash found with user')
+    // debug(user)
 
-    debug('Hash found with user')
-    debug(user)
-
-    console.log('-------')
+    // console.log('-------')
 
     // var dnalinks = getLinks(App.DNA.Hash, "", { Load: true })
     // debug("DNA LINKS:")
@@ -108,7 +108,7 @@ function getUser(x) {
     // APP KEY HASH SCREWED UP
 
     var agentlinks = getLinks(x, "user", { Load: true })   // App.Key.Hash
-    debug("AGENT LINKS:")
+    debug("getLinks user:")
     debug(agentlinks)
     console.log('----------------------')
     if (agentlinks[0]) {
