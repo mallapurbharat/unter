@@ -1,131 +1,90 @@
 {
-    "Version": 1,
-    "UUID": "6a9cdc9b-ad57-4277-abe0-1928072eccdf",
-    "Name": "unter",
-    "Properties": {
-        "description": "Underground ridesharing network",
-        "language": "en"
-    },
-    "PropertiesSchemaFile": "properties_schema.json",
-    "RequiresVersion": 0,
-    "DHTConfig": {
-        "HashType": "sha2-256",
-        "RedundancyFactor": 0
-    },
-    "Progenitor": {
-        "Identity": "",
-        "PubKey": null
-    },
-    "Zomes": [
-      {
-        "Name": "peerVis",
-        "Desription": "show whos online",
-        "CodeFile": "peerVis.js",
-        "RibosomeType": "js",
-        "Config": {
-          "ErrorHandling": "throwErrors"
-        },
-        "Entries": [
-          {
-            "Name": "peerLink",
-            "DataFormat": "links"
-          }
-        ],
-        "Functions": [
-          {
-            "Name": "getPeers",
-            "CallingType": "json",
-            "Exposure": "public"
-          }
-        ]
+  "Version": 1,
+  "UUID": "6a9cdc9b-ad57-4277-abe0-1928072eccdf",
+  "Name": "unter",
+  "Properties": {
+    "description": "Underground ridesharing network",
+    "language": "en"
+  },
+  "PropertiesSchemaFile": "properties_schema.json",
+  "RequiresVersion": 0,
+  "DHTConfig": {
+    "HashType": "sha2-256",
+    "RedundancyFactor": 0
+  },
+  "Progenitor": {
+    "Identity": "",
+    "PubKey": null
+  },
+  "Zomes": [
+    {
+      "Name": "peerVis",
+      "Desription": "show whos online",
+      "CodeFile": "peerVis.js",
+      "RibosomeType": "js",
+      "Config": {
+        "ErrorHandling": "throwErrors"
       },
+      "Entries": [
         {
-            "Name": "drivers",
-            "Description": "To collect information about our car drivers",
-            "CodeFile": "drivers.js",
-            "RibosomeType": "js",
-            "BridgeFuncs": null,
-            "Config": null,
-            "Entries": [
-                {
-                    "Name": "profile",
-                    "DataFormat": "json",
-                    "Schema": "",
-                    "SchemaFile": "profile.json",
-                    "Sharing": "public"
-                },
-                {
-                    "Name": "ratings",
-                    "DataFormat": "json",
-                    "Schema": "",
-                    "SchemaFile": "",
-                    "Sharing": "public"
-                },
-                {
-                    "Name": "car",
-                    "DataFormat": "json",
-                    "Schema": "",
-                    "SchemaFile": "",
-                    "Sharing": "public"
-                }
-            ],
-            "Functions": [
-                {
-                    "Name": "profileCreate",
-                    "CallingType": "json",
-                    "Exposure": "public"
-                },
-                {
-                    "Name": "profileRead",
-                    "CallingType": "json",
-                    "Exposure": "public"
-                },
-                {
-                    "Name": "profileUpdate",
-                    "CallingType": "json",
-                    "Exposure": "public"
-                },
-                {
-                    "Name": "profileDelete",
-                    "CallingType": "json",
-                    "Exposure": "public"
-                },
-                {
-                    "Name": "ratingsCreate",
-                    "CallingType": "json",
-                    "Exposure": "public"
-                },
-                {
-                    "Name": "ratingsRead",
-                    "CallingType": "json",
-                    "Exposure": "public"
-                },
-                {
-                    "Name": "carCreate",
-                    "CallingType": "json",
-                    "Exposure": "public"
-                },
-                {
-                    "Name": "carRead",
-                    "CallingType": "json",
-                    "Exposure": "public"
-                },
-                {
-                    "Name": "findNearbyDriver",
-                    "CallingType": "json",
-                    "Exposure": ""
-                }
-            ]
+          "Name": "peerLink",
+          "DataFormat": "links"
+        }
+      ],
+      "Functions": [
+        {
+          "Name": "getPeers",
+          "CallingType": "json",
+          "Exposure": "public"
+        }
+      ]
+    },
+    {
+      "Name": "users",
+      "Desription": "Manage users",
+      "CodeFile": "users.js",
+      "RibosomeType": "js",
+      "Config": {
+        "ErrorHandling": "throwErrors"
+      },
+      "Entries": [
+        {
+          "Name": "peerLink",
+          "DataFormat": "links"
         },
         {
-            "Name": "anchors",
-            "Description": "This is used to make things findable on the DHT",
-            "CodeFile": "anchors.js",
-            "RibosomeType": "js",
-            "BridgeFuncs": null,
-            "Config": null,
-            "Entries": null,
-            "Functions": []
+          "Name": "registrations",
+          "DataFormat": "links"
+        },
+        {
+          "Name": "agent_user_link",
+          "DataFormat": "links"
+        },
+        {
+          "Name": "user",
+          "DataFormat": "json",
+          "Schema": "",
+          "SchemaFile": "user.json",
+          "Sharing": "public"
         }
-    ]
+      ],
+      "Functions": [
+        {
+          "Name": "register",
+          "CallingType": "json",
+          "Exposure": "public"
+        }
+      ]
+    },
+    {
+      "Name": "anchors",
+      "Description": "This is used to make things findable on the DHT",
+      "CodeFile": "anchors.js",
+      "RibosomeType": "js",
+      "BridgeFuncs": null,
+      "Config": null,
+      "Entries": null,
+      "Functions": []
+    }
+  ]
 }

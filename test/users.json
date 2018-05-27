@@ -1,0 +1,16 @@
+{
+    "Tests": [
+        {
+            "Zome":"users",
+            "FnName":"register",
+            "Input": {
+                "username": "cnorris",
+                "firstName":"Chuck",
+                "lastName":"Norris",
+                "email":"chuck@norris.com"
+            },
+            "Output":"%h2%",
+            "Err":""
+        }
+    ]
+}
