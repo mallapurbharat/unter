@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-
+<!-- api key: AIzaSyCjN8_g9H8A9od3tHp7gC7eaFc2i32w_Fs -->
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,23 +11,128 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <title>unter</title>
+  <style>
+    #map{
+      height: 400px;
+      width: 100%;
+    }
+  </style>
 </head>
 
 <body>
 
   <!-- Begin page content -->
   <main role="main" class="container">
-    <div class="container-fluid">
-      <div class="row content">
-        <div class="col-sm-2 sidenav">
-          <p>
-            <h2>unter</h2>
-            <a href="./peervis.html">
-              <button class="btn btn-primary btn-lg">See Peers</button>
-            </a>
-          </p>
-          </br>
-        </div>
-      </div>
-    </div>
+    <h2>unter</h2>
+    <div id="map"></div>
+    <a href="./peervis.html">
+      <button class="btn btn-primary btn-lg">See Peers</button>
+    </a>
   </main>
+  <script>
+    /*--------------------------
+              init map
+      --------------------------*/
+    var map;
+
+    function initMap() {
+
+      /* cars:
+       *
+       * This is just some sample data of cars. When the app
+       * is complete, this data should be pull from Holochain.
+       */
+      var cars = [
+        new google.maps.LatLng(30.268248270206993, -97.74367613411562),
+        new google.maps.LatLng(30.269100759447227, -97.74648708916322),
+        new google.maps.LatLng(30.27087984358146, -97.74919075585024),
+        new google.maps.LatLng(30.26641353999357, -97.74966282463686),
+        new google.maps.LatLng(30.270490671682165, -97.74060768700258)
+      ]
+
+      /* init map of Austin */
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: 30.257946017337048, lng: -97.74270732394979},
+        zoom: 14
+      });
+
+      /* path to car image */
+      var carIcon = {
+        url: 'img/car_icon.png',
+        scaledSize: new google.maps.Size(30, 30), // scaled size
+        origin: new google.maps.Point(0,0), // origin
+        anchor: new google.maps.Point(0,10) // anchor
+      }
+
+      /* path to user image */
+      var userIcon = {
+        url: 'img/user_icon.png',
+        scaledSize: new google.maps.Size(20, 20), // scaled size
+        origin: new google.maps.Point(0,0), // origin
+        anchor: new google.maps.Point(0, 0) // anchor
+      }
+
+      /* event listener to add marker */
+      google.maps.event.addListener(map, 'click', function(e) {
+
+          console.log(e.latLng.lat())
+          console.log(e.latLng.lng())
+
+          new google.maps.Marker({
+            position: {lat: e.latLng.lat(), lng: e.latLng.lng()},
+            // animation: google.maps.Animation.DROP,
+            map: this,
+            icon: carIcon
+          })
+      });
+
+      /* drop the cars on the map */
+      function dropCars(){
+        var x = 0
+        for(var i = 0; i < cars.length; i++){
+          x = x + 300
+          setTimeout(function(){
+            var car = cars.pop()
+            new google.maps.Marker({
+              position: {lat: car.lat(), lng: car.lng()},
+              map: map,
+              animation: google.maps.Animation.DROP,
+              icon: carIcon
+            })
+          }, x)
+        }
+      }
+
+      /* prompt the user to share his location */
+      navigator.geolocation.getCurrentPosition(function(position) {
+        // success
+
+        // center the map at the user
+        map.panTo(new google.maps.LatLng(position.coords.latitude, position.coords.longitude))
+
+        // drop a user pin on the user's location
+        new google.maps.Marker({
+          position: {lat: position.coords.latitude, lng: position.coords.longitude},
+          // animation: google.maps.Animation.DROP,
+          map: map,
+          icon: userIcon
+        })
+
+        // after we drop the pin, lets zoom in a little more on the user
+        map.setZoom(16)
+
+        // set timeout function to drop the cars
+        setTimeout(function(){
+          dropCars();
+        }, 500)
+      }, function(){
+        // failure
+        console.log('rejected')
+      });
+
+    }
+
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjN8_g9H8A9od3tHp7gC7eaFc2i32w_Fs&callback=initMap"
+    async defer></script>
+</body>
